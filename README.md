@@ -15,13 +15,6 @@ Backend: http://localhost:8080
 
 Inclui feedback visual, mensagens detalhadas e estilização no frontend para facilitar o entendimento.
 
-📂 Estrutura do Projeto
-/backend
-  └── server.js      # Servidor Node/Express (CORS alternável)
-
-/frontend
-  └── index.html     # Interface para testar requisições CORS
-
 🖥️ Backend (Node + Express)
 ✔️ Instalar dependências
 npm install express cors
@@ -110,3 +103,4 @@ JavaScript (Fetch API)
 ✔️ Enxergar o funcionamento real do CORS
 ✔️ Saber como habilitar, configurar e testar CORS no Express
 ✔️ Diagnosticar erros comuns de “Failed to fetch”
+
