@@ -2,7 +2,7 @@
 🚀✨ Teste de CORS — Frontend (3000) + Backend (8080)
 
 Demonstração prática e visual de como o CORS funciona
-entre um cliente e um servidor de origens diferentes.
+entre um cliente e um servidor de diferente origens.
 
 <img src="https://img.shields.io/badge/Node.js-Backend-6DA55F?style=for-the-badge&logo=node.js&logoColor=white"> <img src="https://img.shields.io/badge/HTML-Frontend-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/CORS-Enabled/Disabled-blue?style=for-the-badge"> </div>
 📘 Visão Geral
@@ -103,4 +103,5 @@ JavaScript (Fetch API)
 ✔️ Enxergar o funcionamento real do CORS
 ✔️ Saber como habilitar, configurar e testar CORS no Express
 ✔️ Diagnosticar erros comuns de “Failed to fetch”
+
 
