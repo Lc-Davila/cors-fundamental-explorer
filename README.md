@@ -1,51 +1,53 @@
-🛡️ Teste de CORS — Frontend (3000) + Backend (8080)
+<div align="center">
+🚀✨ Teste de CORS — Frontend (3000) + Backend (8080)
 
-Este projeto demonstra, de forma simples e visual, como funciona o mecanismo de CORS (Cross-Origin Resource Sharing) entre um frontend rodando em http://localhost:3000
- e um backend Node/Express rodando em http://localhost:8080
-.
+Demonstração prática e visual de como o CORS funciona
+entre um cliente e um servidor de origens diferentes.
 
-O objetivo é permitir alternar facilmente entre CORS ATIVADO e CORS BLOQUEADO, para entender como o navegador reage e como diagnosticar o erro.
+<img src="https://img.shields.io/badge/Node.js-Backend-6DA55F?style=for-the-badge&logo=node.js&logoColor=white"> <img src="https://img.shields.io/badge/HTML-Frontend-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/CORS-Enabled/Disabled-blue?style=for-the-badge"> </div>
+📘 Visão Geral
 
-📁 Estrutura do Projeto
+Este projeto permite alternar CORS ATIVADO e CORS BLOQUEADO no backend para observar, na prática, como o navegador reage a requisições entre:
+
+Frontend: http://localhost:3000
+
+Backend: http://localhost:8080
+
+Inclui feedback visual, mensagens detalhadas e estilização no frontend para facilitar o entendimento.
+
+📂 Estrutura do Projeto
 /backend
-  └── server.js     # Código Node+Express com CORS ativável/desativável
+  └── server.js      # Servidor Node/Express (CORS alternável)
 
 /frontend
-  └── index.html    # Página HTML com botão para testar a requisição
+  └── index.html     # Interface para testar requisições CORS
 
-🚀 Como Rodar o Backend (Node/Express)
-1. Instalar dependências
+🖥️ Backend (Node + Express)
+✔️ Instalar dependências
 npm install express cors
 
-2. Rodar o servidor
+▶️ Rodar o servidor
 node server.js
 
-3. Alternar CORS ATIVADO/DESATIVADO
+🔄 Alternar CORS
 
-No arquivo server.js, existe a linha:
+Abra o arquivo server.js e:
+
+Descomente para permitir:
 
 // app.use(cors(corsOptions));
 
 
-Descomentada → CORS permitido (requisição funciona)
+Comente para bloquear.
 
-Comentada → CORS bloqueado (erro “Failed to fetch”)
+O console mostrará instruções claras ao iniciar o servidor.
 
-O console do backend mostrará:
+🌐 Frontend
 
-⚠️  Lembre-se de COMENTAR/DESCOMENTAR 'app.use(cors)' para alternar o teste.
+Não requer instalação.
+Basta abrir o arquivo index.html em um servidor local na porta 3000.
 
-🌐 Como Rodar o Frontend
-
-Basta abrir o arquivo:
-
-frontend/index.html
-
-
-em um servidor rodando na porta 3000.
-
-Caso precise rodar um servidor rápido:
-
+Servidor rápido (opcional):
 npx serve . -l 3000
 
 
@@ -55,65 +57,56 @@ npx live-server --port=3000
 
 🧪 Como Testar
 
-Abra o frontend em:
-http://localhost:3000
+Abra o frontend:
+👉 http://localhost:3000
 
 Clique no botão “Acessar API em 8080”
 
-Veja o resultado na área de resposta:
+Veja o resultado:
 
-Se CORS ativado → mensagem JSON aparece ✔️
+🟢 CORS ATIVADO
 
-Se CORS desativado → mensagem vermelha indicando falha ❌
-(e o console do navegador mostrará erro de CORS)
+✔️ Mensagem JSON aparece
+✔️ Caixa verde no frontend
+✔️ Requisição bem-sucedida
 
-📝 O que é mostrado no backend?
+🔴 CORS BLOQUEADO
 
-O backend retorna:
+❌ "Failed to fetch"
+⚠️ Mensagem vermelha explicando motivo
+🔍 Console mostra erro de política CORS
+
+O frontend foi feito especialmente para você visualizar claramente o diagnóstico.
+
+📨 Resposta da API
+
+O backend retorna algo como:
 
 {
   "data": "Mensagem secreta da API em 8080.",
-  "status": "CORS para 3000 está ATIVADO / DESATIVADO"
+  "status": "CORS para 3000 está ATIVADO ou DESATIVADO"
 }
 
-
-A resposta muda conforme a configuração do CORS.
-
-⚠️ Diagnóstico de Erro de CORS
-
-Quando o CORS está desativado, o navegador bloqueia a requisição e exibe:
-
-"Failed to fetch"
-
-"Cross-Origin Request Blocked"
-
-"CORS policy: No 'Access-Control-Allow-Origin' header"
-
-O frontend já mostra automaticamente uma mensagem explicando o motivo.
-
-✔️ Tecnologias Utilizadas
-Backend:
+🔧 Tecnologias Utilizadas
+Backend
 
 Node.js
 
 Express
 
-CORS
+CORS Middleware
 
-Frontend:
+Frontend
 
-HTML
+HTML5
+
+CSS3 estilizado
 
 JavaScript (Fetch API)
 
-CSS básico para visualização
-
 🎯 Objetivo do Projeto
 
-Este projeto foi criado para fins educacionais, para ajudar a entender:
-
-Como o navegador bloqueia requisições cross-origin
-
-Como analisar erros de CORS no console
-
-Como habilitar e configurar CORS corretamente em aplicações Expres
+✔️ Entender como o navegador bloqueia requisições entre domínios diferentes
+✔️ Enxergar o funcionamento real do CORS
+✔️ Saber como habilitar, configurar e testar CORS no Express
+✔️ Diagnosticar erros comuns de “Failed to fetch”
