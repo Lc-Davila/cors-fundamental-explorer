@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cliente Frontend (Origem: 3000)</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        #resultado { 
+            background-color: #f4f4f4; 
+            border: 1px solid #ddd; 
+            padding: 15px; 
+            white-space: pre-wrap; 
+            color: #333; 
+        }
+        .error { color: red; font-weight: bold; }
+        .success { color: green; }
+    </style>
+</head>
+<body>
+    <h1>Cliente (Origem: Porta 3000)</h1>
+    <p>Tentando acessar o Backend (Origem: Porta 8080)...</p>
+    <button onclick="fazerRequisicao()">Acessar API em 8080</button>
+    <hr>
+    <h3>Resultado da Requisição:</h3>
+    <pre id="resultado">Clique no botão para iniciar o teste.</pre>
+
+    <script>
+        const API_URL = 'http://localhost:8080/api/mensagem';
+        const resultadoElement = document.getElementById("resultado");
+
+        async function fazerRequisicao() {
+            resultadoElement.textContent = '➡️ enviando requisição...';
+            resultadoElement.className = '';
+
+            try {
+                const response = await fetch(API_URL);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP Erro: ${response.status} ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                resultadoElement.textContent = JSON.stringify(data, null, 2);
+                resultadoElement.className = 'success';
+                
+            } catch (error) {
+                let errorMessage = `❌ FALHA NA REQUISIÇÃO:\n\nDetalhes: ${error.message}`;
+                
+                if (error.message.includes("Failed to fetch")) {
+                     errorMessage += "\n\n⚠️ ISTO PROVAVELMENTE É UM ERRO DE CORS.\nVerifique o console (F12) do navegador para a mensagem 'Cross-Origin Read Blocking' ou 'Access-Control-Allow-Origin'.";
+                }
+                
+                resultadoElement.textContent = errorMessage;
+                resultadoElement.className = 'error';
+                console.error("Erro capturado (cheque o erro de CORS no console):", error);
+            }
+        }
+    </script>
+</body>
+</html>
