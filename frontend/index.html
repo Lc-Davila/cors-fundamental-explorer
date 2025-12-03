@@ -3,34 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cliente Frontend (Origem: 3000)</title>
+    <title>Frontend em 3000 - Teste CORS</title>
     <style>
-        body { font-family: sans-serif; padding: 20px; }
+        body { font-family: sans-serif; padding: 20px; background-color: #f0f2f5; }
+        .container { max-width: 600px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h1 { color: #007bff; }
+        button { padding: 10px 20px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s; }
+        button:hover { background-color: #218838; }
         #resultado { 
-            background-color: #f4f4f4; 
-            border: 1px solid #ddd; 
+            background-color: #e9ecef; 
+            border: 1px solid #ced4da; 
             padding: 15px; 
+            margin-top: 20px;
             white-space: pre-wrap; 
-            color: #333; 
+            font-family: monospace; 
+            border-radius: 5px;
         }
-        .error { color: red; font-weight: bold; }
-        .success { color: green; }
+        .error { color: #dc3545; font-weight: bold; background-color: #f8d7da; border-color: #f5c6cb; }
+        .success { color: #155724; background-color: #d4edda; border-color: #c3e6cb; }
     </style>
 </head>
 <body>
-    <h1>Cliente (Origem: Porta 3000)</h1>
-    <p>Tentando acessar o Backend (Origem: Porta 8080)...</p>
-    <button onclick="fazerRequisicao()">Acessar API em 8080</button>
-    <hr>
-    <h3>Resultado da Requisição:</h3>
-    <pre id="resultado">Clique no botão para iniciar o teste.</pre>
+    <div class="container">
+        <h1>Cliente (Origem Simulado: 3000)</h1>
+        <p>Tentando acessar a API de origem cruzada (Destino: 8080)...</p>
+        <button onclick="fazerRequisicao()">Acessar API em 8080</button>
+        <h3>Resposta da API:</h3>
+        <pre id="resultado">Clique no botão para iniciar a requisição.</pre>
+    </div>
 
     <script>
         const API_URL = 'http://localhost:8080/api/mensagem';
         const resultadoElement = document.getElementById("resultado");
 
         async function fazerRequisicao() {
-            resultadoElement.textContent = '➡️ enviando requisição...';
+            resultadoElement.textContent = '➡️ Enviando requisição para ' + API_URL + '...';
             resultadoElement.className = '';
 
             try {
@@ -45,15 +52,18 @@
                 resultadoElement.className = 'success';
                 
             } catch (error) {
-                let errorMessage = `❌ FALHA NA REQUISIÇÃO:\n\nDetalhes: ${error.message}`;
+                
+                let errorMessage = "❌ FALHA NA REQUISIÇÃO. Não foi possível obter a resposta.";
                 
                 if (error.message.includes("Failed to fetch")) {
-                     errorMessage += "\n\n⚠️ ISTO PROVAVELMENTE É UM ERRO DE CORS.\nVerifique o console (F12) do navegador para a mensagem 'Cross-Origin Read Blocking' ou 'Access-Control-Allow-Origin'.";
+                     errorMessage += "\n\n⚠️ DIAGNÓSTICO: ISTO É MUITO PROVAVELMENTE UM ERRO DE CORS.\n\nDetalhes: O navegador bloqueou o acesso devido à política de segurança de Same-Origin.\nSolução: Verifique o console (F12) do navegador para a mensagem 'Cross-Origin Read Blocking' e COMENTE/DESCOMENTE o 'app.use(cors)' no servidor.";
+                } else {
+                     errorMessage += "\n\nDetalhes do Erro: " + error.message;
                 }
                 
                 resultadoElement.textContent = errorMessage;
                 resultadoElement.className = 'error';
-                console.error("Erro capturado (cheque o erro de CORS no console):", error);
+                console.error("Erro na requisição (verifique o erro de CORS no console):", error);
             }
         }
     </script>
